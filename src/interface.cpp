@@ -235,6 +235,7 @@ SEXP pollSocket(SEXP sockets_, SEXP events_, SEXP timeout_) {
     SEXP result;
 #ifdef SIGWINCH
     signal(SIGWINCH, SIG_IGN);
+    signal(SIGCHLD, SIG_IGN);
 #endif
     
     if(TYPEOF(timeout_) != INTSXP) {
@@ -496,6 +497,7 @@ SEXP receiveSocket(SEXP socket_, SEXP dont_wait_) {
   zmq::message_t msg;
 #ifdef SIGWINCH
   signal(SIGWINCH, SIG_IGN);
+  signal(SIGCHLD, SIG_IGN);
 #endif
 
   if(TYPEOF(dont_wait_) != LGLSXP) {
